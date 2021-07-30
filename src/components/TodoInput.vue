@@ -1,0 +1,110 @@
+<template>
+  <article class="todo-input__article">
+    <div class="todo-input__wrap" :class="{'todo-input__wrap--focus': focusOnInput}">
+      <input
+        :value="newTodoItem"
+        @input="updateInput"
+        ref="todoInput"
+        @keyup.enter="addTodo"
+        @focus="focusOnInput = true"
+        @blur="focusOnInput = false"
+        class="todo-input__input"
+        placeholder="할 일을 입력하세요"
+        autocapitalize="off"
+        aria-label="Todo 입력란" />
+      <button
+        v-if="newTodoItem"
+        v-touch="clearInput"
+        type="button"
+        ref="resetBtn"
+        class="todo-input__btn todo-input__btn--reset"
+        aria-label="입력 초기화">
+        <IconDel />
+      </button>
+    </div>
+    <button
+      v-touch.prevent="addTodo"
+      type="submit"
+      ref="addBtn"
+      class="todo-input__btn todo-input__btn--submit"
+      aria-lable="입력값 전송">저장</button>
+  </article>
+</template>
+<script>
+import IconDel from './icon/IconDel'
+export default {
+  name: 'TodoInput',
+  data () {
+    return {
+      newTodoItem: '',
+      focusOnInput: false,
+    }
+  },
+  methods: {
+    updateInput (event) {
+      this.newTodoItem = event.target.value
+    },
+    addTodo: function () {
+      if (!this.newTodoItem) {
+        alert('추가하려는 단어를 입력해주세요')
+        return
+      }
+      localStorage.setItem(this.newTodoItem, this.newTodoItem)
+      this.clearInput()
+    },
+    clearInput: function () {
+      this.newTodoItem = ''
+    },
+  },
+  watch: {
+    newTodoItem (val) {
+      this.newTodoItem = val
+    }
+  },
+  components: {
+    IconDel
+  }
+}
+</script>
+<style lang="scss" scoped>
+.todo-input__article {
+  display: flex;
+  flex-direction: row;
+}
+.todo-input {
+  &__wrap {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    padding: 13px 10px;
+    border: 1px solid #d3d7df;
+    border-radius: 3px;
+    &--focus {
+      border-color: #000;
+    }
+  }
+  &__input {
+    flex: 0 1 auto;
+    width: 100%;
+    line-height: 1.5;
+  }
+  &__btn {
+    flex: 0 0 auto;
+    cursor: pointer;
+    &--reset {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &--submit {
+      width: 70px;
+      margin-left: 5px;
+      font-size: 16px;
+      color: #fff;
+      line-height: 1.5;
+      background-color: #000;
+      border-radius: 3px;
+    }
+  }
+}
+</style>
