@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     removeItem: function (todoItem, index) {
-      const delItem = confirm(`${todoItem} 내용을 삭제하시겠습니까`)
+      const delItem = confirm(`${todoItem} 일정을 삭제하시겠습니까`)
       if (delItem) {
         alert('삭제되었습니다')
         this.$emit('removeItem', todoItem, index)
