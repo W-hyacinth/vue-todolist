@@ -1,6 +1,9 @@
 <template>
   <article class="todo-list__article">
-    <h2 class="todo-list__title">{{ todoTitle }}</h2>
+    <h2 class="todo-list__title">
+      {{ todoTitle }}
+      <span v-if="todoItems.length > 0" class="todo-list__count">({{todoItems.length}}건)</span>
+    </h2>
     <ul v-if="todoItems.length > 0" class="todo-list__list">
       <li
         v-for="(todoItem, index) in todoItems"
