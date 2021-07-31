@@ -5,7 +5,7 @@
         :value="newTodoItem"
         @input="updateInput"
         ref="todoInput"
-        @keyup.enter="addTodo"
+        @keypress.enter="addTodo"
         @focus="focusOnInput = true"
         @blur="focusOnInput = false"
         class="todo-input__input"
@@ -14,7 +14,7 @@
         aria-label="Todo 입력란" />
       <button
         v-if="newTodoItem"
-        v-touch="clearInput"
+        @click="clearInput"
         type="button"
         ref="resetBtn"
         class="todo-input__btn todo-input__btn--reset"
@@ -44,15 +44,24 @@ export default {
     updateInput (event) {
       this.newTodoItem = event.target.value
     },
-    addTodo: function () {
+    addTodo: function (e) {
+      console.log(e)
+      const isSameTodoItem = localStorage.getItem(this.newTodoItem)
       if (!this.newTodoItem) {
-        alert('추가하려는 단어를 입력해주세요')
+        alert('추가하려는 내용을 입력해주세요.')
+        return
+      } else if (isSameTodoItem) {
+        alert('이미 입력된 내용입니다.')
         return
       }
-      localStorage.setItem(this.newTodoItem, this.newTodoItem)
-      this.clearInput()
+      this.$emit('addItem', this.newTodoItem)
+      this.resetInput()
     },
     clearInput: function () {
+      this.resetInput()
+      this.$refs.todoInput.focus()
+    },
+    resetInput: function () {
       this.newTodoItem = ''
     },
   },
@@ -77,6 +86,7 @@ export default {
     display: flex;
     flex-direction: row;
     padding: 13px 10px;
+    background-color: #fff;
     border: 1px solid #d3d7df;
     border-radius: 3px;
     &--focus {
