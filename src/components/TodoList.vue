@@ -1,5 +1,6 @@
 <template>
   <article class="todo-list__article">
+    <h2 class="todo-list__title">{{ todoTitle }}</h2>
     <ul v-if="todoItems.length > 0" class="todo-list__list">
       <li
         v-for="(todoItem, index) in todoItems"
@@ -29,7 +30,7 @@
       </li>
     </ul>
     <p v-else class="todo-list__notice todo-list__notice--nodata">
-      저장된 내용이 없습니다.
+      {{ todoTitle }}이 없습니다.
     </p>
   </article>
 </template>
@@ -42,6 +43,10 @@ export default {
     todoItems: {
       type: Array,
       default: () => {return []}
+    },
+    todoTitle: {
+      type: String,
+      default: () => {return '해야 할 일'}
     }
   },
   methods: {
@@ -52,8 +57,8 @@ export default {
         this.$emit('removeItem', todoItem, index)
       }
     },
-    toggleComplete: function (todoItem, index) {
-      this.$emit('toggleItem', todoItem, index)
+    toggleComplete: function (todoItem) {
+      this.$emit('toggleItem', todoItem)
     }
   },
   components: {

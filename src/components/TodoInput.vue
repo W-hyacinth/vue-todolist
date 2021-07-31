@@ -45,7 +45,6 @@ export default {
       this.newTodoItem = event.target.value
     },
     addTodo: function (e) {
-      console.log(e)
       const isSameTodoItem = localStorage.getItem(this.newTodoItem)
       if (!this.newTodoItem) {
         alert('추가하려는 내용을 입력해주세요.')

@@ -3,9 +3,15 @@
     <TodoHeader />
     <TodoInput @addItem="addTodoItem" />
     <TodoList
-      :todoItems="todoItems"
+      :todoItems="expectedTodoItems"
       @removeItem="removeTodoItem"
-      @toggleItem="toggleTodoItem" />
+      @toggleItem="toggleTodoItem"
+      todoTitle="예정된 일정" />
+    <TodoList
+      :todoItems="completedTodoItems"
+      @removeItem="removeTodoItem"
+      @toggleItem="toggleTodoItem"
+      todoTitle="완료된 일정" />
     <TodoClearButton v-if="todoItems.length > 0" @clearItem="clearAllTodoItem" />
     <TodoFooter />
   </div>
@@ -27,7 +33,7 @@ export default {
   },
   methods: {
     addTodoItem: function (todoItem) {
-      const obj = {time: new Date(), item: todoItem, completed: false}
+      const obj = {time: new Date().getTime(), item: todoItem, completed: false}
       localStorage.setItem(todoItem, JSON.stringify(obj))
       this.todoItems.push(obj)
     },
@@ -35,7 +41,8 @@ export default {
       localStorage.removeItem(todoItem)
       this.todoItems.splice(index, 1)
     },
-    toggleTodoItem: function (todoItem, index) {
+    toggleTodoItem: function (todoItem) {
+      const index = this.todoItems.findIndex(i => i.item === todoItem.item)
       this.todoItems[index].completed = !this.todoItems[index].completed
 
       localStorage.removeItem(todoItem.item)
@@ -46,12 +53,21 @@ export default {
       this.todoItems = []
     }
   },
+  computed: {
+    expectedTodoItems: function () {
+      return this.todoItems.filter(e => !e.completed)
+    },
+    completedTodoItems: function () {
+      return this.todoItems.filter(e => e.completed)
+    }
+  },
   created () {
     if (localStorage.length > 0) {
       for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i) === 'loglevel:webpack-dev-server') continue
         this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
       }
+      this.todoItems.sort((a, b) => { return a.time - b.time })
     }
   },
   components: {
