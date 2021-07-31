@@ -32,32 +32,32 @@ export default {
     }
   },
   methods: {
-    addTodoItem: function (todoItem) {
+    addTodoItem(todoItem) {
       const obj = {time: new Date().getTime(), item: todoItem, completed: false}
       localStorage.setItem(todoItem, JSON.stringify(obj))
       this.todoItems.push(obj)
     },
-    removeTodoItem: function (todoItem, index) {
+    removeTodoItem(todoItem, index) {
       localStorage.removeItem(todoItem)
       this.todoItems.splice(index, 1)
     },
-    toggleTodoItem: function (todoItem) {
+    toggleTodoItem(todoItem) {
       const index = this.todoItems.findIndex(i => i.item === todoItem.item)
       this.todoItems[index].completed = !this.todoItems[index].completed
 
       localStorage.removeItem(todoItem.item)
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
     },
-    clearAllTodoItem: function () {
+    clearAllTodoItem() {
       localStorage.clear()
       this.todoItems = []
     }
   },
   computed: {
-    expectedTodoItems: function () {
+    expectedTodoItems() {
       return this.todoItems.filter(e => !e.completed)
     },
-    completedTodoItems: function () {
+    completedTodoItems() {
       return this.todoItems.filter(e => e.completed)
     }
   },

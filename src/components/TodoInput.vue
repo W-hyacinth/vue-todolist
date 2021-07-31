@@ -41,10 +41,10 @@ export default {
     }
   },
   methods: {
-    updateInput (event) {
+    updateInput(event) {
       this.newTodoItem = event.target.value
     },
-    addTodo: function (e) {
+    addTodo(e) {
       const isSameTodoItem = localStorage.getItem(this.newTodoItem)
       if (!this.newTodoItem) {
         alert('추가하려는 내용을 입력해주세요.')
@@ -56,16 +56,16 @@ export default {
       this.$emit('addItem', this.newTodoItem)
       this.resetInput()
     },
-    clearInput: function () {
+    clearInput() {
       this.resetInput()
       this.$refs.todoInput.focus()
     },
-    resetInput: function () {
+    resetInput() {
       this.newTodoItem = ''
     },
   },
   watch: {
-    newTodoItem (val) {
+    newTodoItem(val) {
       this.newTodoItem = val
     }
   },

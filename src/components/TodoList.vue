@@ -9,7 +9,10 @@
         v-for="(todoItem, index) in todoItems"
         :key="index"
         class="todo-list__item">
-        <label class="todo-list__label" @click.prevent="toggleComplete(todoItem, index)">
+        <label class="todo-list__label"
+           @click.prevent="toggleComplete(todoItem, index)"
+           @keypress.enter.prevent="toggleComplete(todoItem, index)"
+           tabindex="0">
           <input
             v-model="todoItem.completed"
             type="checkbox"
@@ -53,14 +56,14 @@ export default {
     }
   },
   methods: {
-    removeItem: function (todoItem, index) {
+    removeItem(todoItem, index) {
       const delItem = confirm(`${todoItem} 일정을 삭제하시겠습니까`)
       if (delItem) {
         alert('삭제되었습니다')
         this.$emit('removeItem', todoItem, index)
       }
     },
-    toggleComplete: function (todoItem) {
+    toggleComplete(todoItem) {
       this.$emit('toggleItem', todoItem)
     }
   },
