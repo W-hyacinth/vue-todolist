@@ -9,22 +9,22 @@
         v-for="(todoItem, index) in todoItems"
         :key="index"
         class="todo-list__item">
+        <span class="todo-list__name" :class="{'todo-list__name--completed': todoItem.completed}">
+          {{ todoItem.item }}
+        </span>
         <label class="todo-list__label"
-           @click.prevent="toggleComplete(todoItem)"
-           @keypress.enter.prevent="toggleComplete(todoItem)"
-           tabindex="0">
+               @click.prevent="toggleComplete(todoItem)"
+               @keypress.enter.prevent="toggleComplete(todoItem)"
+               tabindex="0">
           <input
             v-model="todoItem.completed"
             type="checkbox"
             class="todo-list__input ally"
-            aria-label="입력된 내용 선택">
+            :aria-label="`${todoItem.item} 일정 완료여부 체크`">
           <span class="todo-list__icon">
             <IconCheck :size="20" :color="!todoItem.completed ? '#dedede' : '#000'" />
           </span>
         </label>
-        <span class="todo-list__name" :class="{'todo-list__name--completed': todoItem.completed}">
-          {{ todoItem.item }}
-        </span>
         <button
           @click="removeItem(todoItem)"
           type="button"
@@ -97,6 +97,7 @@ export default {
   &__label {
     display: flex;
     align-items: center;
+    order: 1;
     margin-right: 10px;
     cursor: pointer;
   }
@@ -113,6 +114,7 @@ export default {
   }
   &__name {
     flex: 0 1 auto;
+    order: 2;
     display: block;
     width: 100%;
     margin-right: 10px;
@@ -124,6 +126,7 @@ export default {
   &__btn {
     cursor: pointer;
     &--delete {
+      order: 3;
       margin-left: auto;
     }
   }
