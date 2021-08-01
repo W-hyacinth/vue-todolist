@@ -10,8 +10,8 @@
         :key="index"
         class="todo-list__item">
         <label class="todo-list__label"
-           @click.prevent="toggleComplete(todoItem, index)"
-           @keypress.enter.prevent="toggleComplete(todoItem, index)"
+           @click.prevent="toggleComplete(todoItem)"
+           @keypress.enter.prevent="toggleComplete(todoItem)"
            tabindex="0">
           <input
             v-model="todoItem.completed"
@@ -26,7 +26,7 @@
           {{ todoItem.item }}
         </span>
         <button
-          @click="removeItem(todoItem.item, index)"
+          @click="removeItem(todoItem)"
           type="button"
           ref="removeBtn"
           class="todo-list__btn todo-list__btn--delete"
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     removeItem(todoItem) {
-      const delItem = confirm(`${todoItem} 일정을 삭제하시겠습니까`)
+      const delItem = confirm(`${todoItem.item} 일정을 삭제하시겠습니까`)
       if (delItem) {
         alert('삭제되었습니다')
         this.$emit('removeItem', todoItem)

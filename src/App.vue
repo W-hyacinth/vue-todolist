@@ -39,7 +39,6 @@ export default {
     },
     removeTodoItem(todoItem) {
       const index = this.todoItems.findIndex(i => i.item === todoItem.item)
-
       localStorage.removeItem(todoItem)
       this.todoItems.splice(index, 1)
     },
