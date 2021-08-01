@@ -4,7 +4,7 @@
       {{ todoTitle }}
       <span v-if="todoItems.length > 0" class="todo-list__count">({{todoItems.length}}건)</span>
     </h2>
-    <ul v-if="todoItems.length > 0" class="todo-list__list">
+    <transition-group tag="ul" name="list" v-if="todoItems.length > 0" class="todo-list__list">
       <li
         v-for="(todoItem, index) in todoItems"
         :key="index"
@@ -16,7 +16,7 @@
           <input
             v-model="todoItem.completed"
             type="checkbox"
-            class="todo-list__input"
+            class="todo-list__input ally"
             aria-label="입력된 내용 선택">
           <span class="todo-list__icon">
             <IconCheck :size="20" :color="!todoItem.completed ? '#dedede' : '#000'" />
@@ -34,7 +34,7 @@
           <IconTrash :color="'#c23934'" />
         </button>
       </li>
-    </ul>
+    </transition-group>
     <p v-else class="todo-list__notice todo-list__notice--nodata">
       {{ todoTitle }}이 없습니다.
     </p>
@@ -135,5 +135,24 @@ export default {
     border: 1px solid #d3d7df;
     border-radius: 3px;
   }
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-leave-active {
+  position: absolute;
+  width: calc(100% - 32px - env(safe-area-inset-right) - env(safe-area-inset-left));
+  pointer-events: none;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+}
+.list-enter {
+  transform: translateY(30px);
+}
+.list-leave-to {
+  transform: translateY(-10px);
 }
 </style>
