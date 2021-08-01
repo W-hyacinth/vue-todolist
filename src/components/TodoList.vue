@@ -20,7 +20,8 @@
             v-model="todoItem.completed"
             type="checkbox"
             class="todo-list__input ally"
-            :aria-label="`${todoItem.item} 일정 완료여부 체크`">
+            :aria-label="`${todoItem.item} 일정 완료여부 체크`"
+            tabindex="-1">
           <span class="todo-list__icon">
             <IconCheck :size="20" :color="!todoItem.completed ? '#dedede' : '#000'" />
           </span>

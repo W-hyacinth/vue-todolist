@@ -18,7 +18,7 @@
         type="button"
         ref="resetBtn"
         class="todo-input__btn todo-input__btn--reset"
-        aria-label="입력 초기화">
+        aria-label="일정 입력 초기화">
         <IconDel />
       </button>
     </div>
@@ -26,8 +26,9 @@
       v-touch.prevent="addTodo"
       type="submit"
       ref="addBtn"
-      class="todo-input__btn todo-input__btn--submit"
-      aria-lable="입력값 전송">저장</button>
+      class="todo-input__btn todo-input__btn--submit">
+      <span class="ally">일정</span>저장
+    </button>
   </article>
 </template>
 <script>
