@@ -56,11 +56,11 @@ export default {
     }
   },
   methods: {
-    removeItem(todoItem, index) {
+    removeItem(todoItem) {
       const delItem = confirm(`${todoItem} 일정을 삭제하시겠습니까`)
       if (delItem) {
         alert('삭제되었습니다')
-        this.$emit('removeItem', todoItem, index)
+        this.$emit('removeItem', todoItem)
       }
     },
     toggleComplete(todoItem) {

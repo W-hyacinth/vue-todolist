@@ -37,7 +37,9 @@ export default {
       localStorage.setItem(todoItem, JSON.stringify(obj))
       this.todoItems.push(obj)
     },
-    removeTodoItem(todoItem, index) {
+    removeTodoItem(todoItem) {
+      const index = this.todoItems.findIndex(i => i.item === todoItem.item)
+
       localStorage.removeItem(todoItem)
       this.todoItems.splice(index, 1)
     },
