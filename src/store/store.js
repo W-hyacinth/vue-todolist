@@ -22,12 +22,6 @@ export const store = new Vuex.Store({
     todoItems: storage.fetch()
   },
   getters: {
-    expectedTodoItems(state) {
-      return state.todoItems.filter(e => !e.completed)
-    },
-    completedTodoItems(state) {
-      return state.todoItems.filter(e => e.completed)
-    }
   },
   mutations: {
     addTodoItem(state, todoItem) {

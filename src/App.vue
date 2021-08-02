@@ -3,10 +3,10 @@
     <TodoHeader />
     <TodoInput />
     <TodoList
-      :todoItems="this.$store.getters.expectedTodoItems"
+      :todoItems="expectedTodoItems"
       todoTitle="예정된 일정" />
     <TodoList
-      :todoItems="this.$store.getters.completedTodoItems"
+      :todoItems="completedTodoItems"
       todoTitle="완료된 일정" />
     <TodoClearButton v-if="this.$store.state.todoItems.length > 0" />
     <TodoFooter />
@@ -22,7 +22,13 @@ import TodoList from './components/TodoList'
 import TodoClearButton from './components/TodoClearButton'
 export default {
   name: 'App',
-  methods: {
+  computed: {
+    expectedTodoItems() {
+      return this.$store.state.todoItems.filter(e => !e.completed)
+    },
+    completedTodoItems() {
+      return this.$store.state.todoItems.filter(e => e.completed)
+    }
   },
   components: {
     TodoHeader,
