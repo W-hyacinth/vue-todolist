@@ -14,7 +14,7 @@ export default {
       const isClearAll = confirm('현재 등록된 모든 내용을 삭제하시겠습니까?')
       if (isClearAll) {
         alert('모든 내용이 삭제됬습니다')
-        this.$emit('clearItem')
+        this.$store.commit('clearAllTodoItem')
       }
     }
   }

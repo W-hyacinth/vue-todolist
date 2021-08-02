@@ -61,11 +61,11 @@ export default {
       const delItem = confirm(`${todoItem.item} 일정을 삭제하시겠습니까`)
       if (delItem) {
         alert('삭제되었습니다')
-        this.$emit('removeItem', todoItem)
+        this.$store.commit('removeTodoItem', {todoItem})
       }
     },
     toggleComplete(todoItem) {
-      this.$emit('toggleItem', todoItem)
+      this.$store.commit('toggleTodoItem', {todoItem})
     }
   },
   components: {

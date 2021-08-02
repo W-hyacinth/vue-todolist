@@ -4,15 +4,11 @@
     <TodoInput />
     <TodoList
       :todoItems="this.$store.getters.expectedTodoItems"
-      @removeItem="removeTodoItem"
-      @toggleItem="toggleTodoItem"
       todoTitle="예정된 일정" />
     <TodoList
       :todoItems="this.$store.getters.completedTodoItems"
-      @removeItem="removeTodoItem"
-      @toggleItem="toggleTodoItem"
       todoTitle="완료된 일정" />
-    <TodoClearButton v-if="this.$store.state.todoItems.length > 0" @clearItem="clearAllTodoItem" />
+    <TodoClearButton v-if="this.$store.state.todoItems.length > 0" />
     <TodoFooter />
   </div>
 </template>
@@ -26,28 +22,7 @@ import TodoList from './components/TodoList'
 import TodoClearButton from './components/TodoClearButton'
 export default {
   name: 'App',
-  data () {
-    return {
-      todoItems: []
-    }
-  },
   methods: {
-    removeTodoItem(todoItem) {
-      const index = this.todoItems.findIndex(i => i.item === todoItem.item)
-      localStorage.removeItem(todoItem)
-      this.todoItems.splice(index, 1)
-    },
-    toggleTodoItem(todoItem) {
-      const index = this.todoItems.findIndex(i => i.item === todoItem.item)
-      this.todoItems[index].completed = !this.todoItems[index].completed
-
-      localStorage.removeItem(todoItem.item)
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
-    },
-    clearAllTodoItem() {
-      localStorage.clear()
-      this.todoItems = []
-    }
   },
   components: {
     TodoHeader,
