@@ -54,7 +54,8 @@ export default {
         alert('이미 입력된 내용입니다.')
         return
       }
-      this.$emit('addItem', this.newTodoItem)
+
+      this.$store.commit('addTodoItem', this.newTodoItem)
       this.resetInput()
     },
     clearInput() {

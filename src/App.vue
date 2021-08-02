@@ -1,18 +1,18 @@
 <template>
   <div id="app">
     <TodoHeader />
-    <TodoInput @addItem="addTodoItem" />
+    <TodoInput />
     <TodoList
-      :todoItems="expectedTodoItems"
+      :todoItems="this.$store.getters.expectedTodoItems"
       @removeItem="removeTodoItem"
       @toggleItem="toggleTodoItem"
       todoTitle="예정된 일정" />
     <TodoList
-      :todoItems="completedTodoItems"
+      :todoItems="this.$store.getters.completedTodoItems"
       @removeItem="removeTodoItem"
       @toggleItem="toggleTodoItem"
       todoTitle="완료된 일정" />
-    <TodoClearButton v-if="todoItems.length > 0" @clearItem="clearAllTodoItem" />
+    <TodoClearButton v-if="this.$store.state.todoItems.length > 0" @clearItem="clearAllTodoItem" />
     <TodoFooter />
   </div>
 </template>
@@ -32,11 +32,6 @@ export default {
     }
   },
   methods: {
-    addTodoItem(todoItem) {
-      const obj = {time: new Date().getTime(), item: todoItem, completed: false}
-      localStorage.setItem(todoItem, JSON.stringify(obj))
-      this.todoItems.push(obj)
-    },
     removeTodoItem(todoItem) {
       const index = this.todoItems.findIndex(i => i.item === todoItem.item)
       localStorage.removeItem(todoItem)
@@ -52,23 +47,6 @@ export default {
     clearAllTodoItem() {
       localStorage.clear()
       this.todoItems = []
-    }
-  },
-  computed: {
-    expectedTodoItems() {
-      return this.todoItems.filter(e => !e.completed)
-    },
-    completedTodoItems() {
-      return this.todoItems.filter(e => e.completed)
-    }
-  },
-  created () {
-    if (localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) === 'loglevel:webpack-dev-server') continue
-        this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
-      }
-      this.todoItems.sort((a, b) => { return a.time - b.time })
     }
   },
   components: {
