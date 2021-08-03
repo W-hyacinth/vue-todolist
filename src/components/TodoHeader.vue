@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: 'TodoHeader',
+  name: 'TodoHeader'
 }
 </script>
 <style lang="scss" scoped>

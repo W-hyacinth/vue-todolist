@@ -38,14 +38,14 @@ export default {
   data () {
     return {
       newTodoItem: '',
-      focusOnInput: false,
+      focusOnInput: false
     }
   },
   methods: {
-    updateInput(event) {
+    updateInput (event) {
       this.newTodoItem = event.target.value
     },
-    addTodo(e) {
+    addTodo (e) {
       const isSameTodoItem = localStorage.getItem(this.newTodoItem)
       if (!this.newTodoItem) {
         alert('추가하려는 내용을 입력해주세요.')
@@ -58,13 +58,13 @@ export default {
       this.$store.commit('addTodoItem', this.newTodoItem)
       this.resetInput()
     },
-    clearInput() {
+    clearInput () {
       this.resetInput()
       this.$refs.todoInput.focus()
     },
-    resetInput() {
+    resetInput () {
       this.newTodoItem = ''
-    },
+    }
   },
   components: {
     IconDel

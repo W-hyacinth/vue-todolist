@@ -20,7 +20,7 @@ export default {
     color: {
       type: String,
       default: '#8C9196'
-    },
+    }
   }
 }
 </script>

@@ -25,10 +25,10 @@ export default {
   name: 'App',
   computed: {
     ...mapState(['todoItems']),
-    expectedTodoItems() {
+    expectedTodoItems () {
       return this.todoItems.filter(e => !e.completed)
     },
-    completedTodoItems() {
+    completedTodoItems () {
       return this.todoItems.filter(e => e.completed)
     }
   },

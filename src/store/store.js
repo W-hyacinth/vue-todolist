@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const storage = {
-  fetch() {
+  fetch () {
     const arr = []
     if (localStorage.length > 0) {
       for (let i = 0; i < localStorage.length; i++) {
@@ -24,24 +24,24 @@ export const store = new Vuex.Store({
   getters: {
   },
   mutations: {
-    addTodoItem(state, todoItem) {
+    addTodoItem (state, todoItem) {
       const obj = {time: new Date().getTime(), item: todoItem, completed: false}
       localStorage.setItem(todoItem, JSON.stringify(obj))
       state.todoItems.push(obj)
     },
-    removeTodoItem(state, payload) {
+    removeTodoItem (state, payload) {
       const index = state.todoItems.findIndex(i => i.item === payload.todoItem.item)
       localStorage.removeItem(payload.todoItem.item)
       state.todoItems.splice(index, 1)
     },
-    toggleTodoItem(state, payload) {
+    toggleTodoItem (state, payload) {
       const index = state.todoItems.findIndex(i => i.item === payload.todoItem.item)
       state.todoItems[index].completed = !state.todoItems[index].completed
 
       localStorage.removeItem(payload.todoItem.item)
       localStorage.setItem(payload.todoItem.item, JSON.stringify(payload.todoItem))
     },
-    clearAllTodoItem(state) {
+    clearAllTodoItem (state) {
       localStorage.clear()
       state.todoItems = []
     }

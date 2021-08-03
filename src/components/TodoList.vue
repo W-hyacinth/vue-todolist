@@ -7,7 +7,7 @@
     <transition-group tag="ul" name="list" v-if="todoItems.length > 0" class="todo-list__list">
       <li
         v-for="(todoItem, index) in todoItems"
-        :key="index"
+        :key="index+1"
         class="todo-list__item">
         <span class="todo-list__name" :class="{'todo-list__name--completed': todoItem.completed}">
           {{ todoItem.item }}
@@ -50,29 +50,29 @@ export default {
   props: {
     todoItems: {
       type: Array,
-      default: () => {return []}
+      default: () => { return [] }
     },
     todoTitle: {
       type: String,
-      default: () => {return '해야 할 일'}
+      default: () => { return '해야 할 일' }
     }
   },
   methods: {
     ...mapMutations({
-      toggleComplete: 'toggleTodoItem',
+      toggleComplete: 'toggleTodoItem'
     }),
-    removeItem(todoItem) {
+    removeItem (todoItem) {
       const delItem = confirm(`${todoItem.item} 일정을 삭제하시겠습니까`)
       if (delItem) {
         alert('삭제되었습니다')
         this.$store.commit('removeTodoItem', {todoItem})
       }
-    },
+    }
   },
   components: {
     IconTrash,
     IconCheck
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
