@@ -8,13 +8,14 @@
     <TodoList
       :todoItems="completedTodoItems"
       todoTitle="완료된 일정" />
-    <TodoClearButton v-if="this.$store.state.todoItems.length > 0" />
+    <TodoClearButton v-if="this.todoItems.length > 0" />
     <TodoFooter />
   </div>
 </template>
 
 <script>
 import 'modern-normalize'
+import { mapState } from 'vuex'
 import TodoHeader from './components/TodoHeader'
 import TodoFooter from './components/TodoFooter'
 import TodoInput from './components/TodoInput'
@@ -23,11 +24,12 @@ import TodoClearButton from './components/TodoClearButton'
 export default {
   name: 'App',
   computed: {
+    ...mapState(['todoItems']),
     expectedTodoItems() {
-      return this.$store.state.todoItems.filter(e => !e.completed)
+      return this.todoItems.filter(e => !e.completed)
     },
     completedTodoItems() {
-      return this.$store.state.todoItems.filter(e => e.completed)
+      return this.todoItems.filter(e => e.completed)
     }
   },
   components: {

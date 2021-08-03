@@ -66,11 +66,6 @@ export default {
       this.newTodoItem = ''
     },
   },
-  watch: {
-    newTodoItem(val) {
-      this.newTodoItem = val
-    }
-  },
   components: {
     IconDel
   }

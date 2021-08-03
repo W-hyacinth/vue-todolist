@@ -13,8 +13,8 @@
           {{ todoItem.item }}
         </span>
         <label class="todo-list__label"
-               @click.prevent="toggleComplete(todoItem)"
-               @keypress.enter.prevent="toggleComplete(todoItem)"
+               @click.prevent="toggleComplete({todoItem})"
+               @keypress.enter.prevent="toggleComplete({todoItem})"
                tabindex="0">
           <input
             v-model="todoItem.completed"
@@ -42,6 +42,7 @@
   </article>
 </template>
 <script>
+import { mapMutations } from 'vuex'
 import IconTrash from './icon/IconTrash'
 import IconCheck from './icon/IconCheck'
 export default {
@@ -57,6 +58,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      toggleComplete: 'toggleTodoItem',
+    }),
     removeItem(todoItem) {
       const delItem = confirm(`${todoItem.item} 일정을 삭제하시겠습니까`)
       if (delItem) {
@@ -64,9 +68,6 @@ export default {
         this.$store.commit('removeTodoItem', {todoItem})
       }
     },
-    toggleComplete(todoItem) {
-      this.$store.commit('toggleTodoItem', {todoItem})
-    }
   },
   components: {
     IconTrash,
