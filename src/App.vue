@@ -87,4 +87,11 @@ button {
 /deep/ #footer {
   margin-top: auto;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  #app {
+    padding-right: 16px;
+    padding-left: 16px;
+    height: 100vh;
+  }
+}
 </style>
