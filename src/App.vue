@@ -42,7 +42,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 body {
   width: 100%;
   font-family: 'ubuntu';
@@ -54,6 +54,18 @@ input {
   border-radius: 0;
   background-color: transparent;
   appearance: none;
+  &::-ms-clear,
+  &::-ms-reveal{
+     display: none;
+     width: 0;
+     height: 0;
+  }
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration{
+    display: none;
+  }
 }
 button {
   padding: 0;
