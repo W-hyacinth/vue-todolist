@@ -23,7 +23,7 @@
       </button>
     </div>
     <button
-      v-touch.prevent="addTodo"
+      @click="addTodo"
       type="submit"
       ref="addBtn"
       class="todo-input__btn todo-input__btn--submit">

@@ -1,13 +1,12 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import 'babel-polyfill'
 import Vue from 'vue'
 import router from 'vue-router'
-import Vue2TouchEvents from 'vue2-touch-events'
 import App from './App'
 import { store } from './store/store'
 
 Vue.config.productionTip = false
-Vue.use(Vue2TouchEvents)
 
 /* eslint-disable no-new */
 new Vue({
