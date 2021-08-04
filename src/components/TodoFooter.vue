@@ -14,4 +14,10 @@ export default {
   font-size: 14px;
   text-align: center;
 }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  #footer {
+    padding: 20px 0 20px;
+  }
+}
 </style>
